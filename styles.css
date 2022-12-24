@@ -31,9 +31,6 @@ main {
   padding: 3em;
 }
 
-main > * {
-  /* border: 2px solid red; */
-}
 
 .player {
   display: flex;
@@ -103,7 +100,34 @@ div:nth-child(6) {
   aspect-ratio: 2/2;
 }
 
+
 .active svg,
 .active p {
   color: #f3b54a;
+}
+
+.popUp{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -2;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 3rem;
+}
+
+.show{
+  opacity: 1;
+  z-index: 2;
+}
+
+.blur{
+  pointer-events: none;
+  filter: blur(8px);
 }
