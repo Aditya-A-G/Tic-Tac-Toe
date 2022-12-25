@@ -1,114 +1,3 @@
-// const Gameboard = (function () {
-//   const gameBoard = [[], [], []];
-//   let currentPlayer = "X";
-
-//   function addSymbol(e) {
-//     let position = e.target.getAttribute("data-index");
-//     position = position.split("-");
-//     const row = position[0];
-//     const column = position[1];
-//     console.log({ row, column });
-//     gameBoard[row][column] = currentPlayer;
-//     console.log(gameBoard);
-//     e.target.textContent = currentPlayer;
-//     let winner = checkWinAndTie();
-//     if (winner) {
-//       console.log(`${currentPlayer} is the winner of this game`);
-//     } else {
-//       currentPlayer = currentPlayer === "X" ? "O" : "X";
-//       e.target.style.pointerEvents = "none";
-//     }
-//   }
-
-//   function checkWinAndTie() {
-//     // Check rows
-
-//     if (
-//       (gameBoard[0][0] === "X" &&
-//         gameBoard[0][1] === "X" &&
-//         gameBoard[0][2] === "X") ||
-//       (gameBoard[0][0] === "O" &&
-//         gameBoard[0][1] === "O" &&
-//         gameBoard[0][2] === "O")
-//     ) {
-//       console.log("true");
-//       return true;
-//     }
-
-//     if (
-//       (gameBoard[1][0] === "X" &&
-//         gameBoard[1][1] === "X" &&
-//         gameBoard[1][2] === "X") ||
-//       (gameBoard[1][0] === "O" &&
-//         gameBoard[1][1] === "O" &&
-//         gameBoard[1][2] === "O")
-//     ) {
-//       console.log("true");
-//       return true;
-//     }
-
-//     if (
-//       (gameBoard[2][0] === "X" &&
-//         gameBoard[2][1] === "X" &&
-//         gameBoard[2][2] === "X") ||
-//       (gameBoard[2][0] === "O" &&
-//         gameBoard[2][1] === "O" &&
-//         gameBoard[2][2] === "O")
-//     ) {
-//       console.log("true");
-//       return true;
-//     }
-
-//     // Check Columns
-//     if (
-//       (gameBoard[0][0] === "X" &&
-//         gameBoard[1][0] === "X" &&
-//         gameBoard[2][0] === "X") ||
-//       (gameBoard[0][0] === "O" &&
-//         gameBoard[1][0] === "O" &&
-//         gameBoard[2][0] === "O")
-//     ) {
-//       console.log("true");
-//       return true;
-//     }
-
-//     if (
-//       (gameBoard[0][1] === "X" &&
-//         gameBoard[1][1] === "X" &&
-//         gameBoard[2][1] === "X") ||
-//       (gameBoard[0][1] === "O" &&
-//         gameBoard[1][1] === "O" &&
-//         gameBoard[2][1] === "O")
-//     ) {
-//       console.log("true");
-//       return true;
-//     }
-
-//     if (
-//       (gameBoard[0][2] === "X" &&
-//         gameBoard[1][2] === "X" &&
-//         gameBoard[2][2] === "X") ||
-//       (gameBoard[0][2] === "O" &&
-//         gameBoard[1][2] === "O" &&
-//         gameBoard[2][2] === "O")
-//     ) {
-//       console.log("true");
-//       return true;
-//     }
-//     return false;
-//   }
-
-//   return {
-//     addSymbol,
-//   };
-// })();
-
-// const cells = document.querySelectorAll(".cell");
-
-// cells.forEach((cell) => {
-//   cell.addEventListener("click", Gameboard.addSymbol);
-// });
-
 const Players = function (name, symbol, ref) {
   const playerName = name;
   const playerSymbol = symbol;
@@ -120,17 +9,18 @@ const Players = function (name, symbol, ref) {
   };
 };
 
-const Gameboard = (function () {
+const Gameboard = (function (doc) {
   let gameBoard = [];
+  const main = doc.querySelector("main");
 
   function addSymbol(e) {
-    const location = e.target.getAttribute('data-index');
+    const location = e.target.getAttribute("data-index");
     const currentPlayer = Game.getCurrentPlayer();
     gameBoard[location] = currentPlayer.playerSymbol;
     DisplayController.render(gameBoard);
     const ans = checkWinAndTie();
     console.log(ans);
-    if (ans === 'Tie') {
+    if (ans === "Tie") {
       DisplayController.displayTie();
       Game.restartGame();
     } else if (ans) {
@@ -152,75 +42,90 @@ const Gameboard = (function () {
     // Check rows
 
     if (
-      (gameBoard[0] === 'X' && gameBoard[1] === 'X' && gameBoard[2] === 'X')
-      || (gameBoard[0] === 'O' && gameBoard[1] === 'O' && gameBoard[2] === 'O')
+      (gameBoard[0] === "X" && gameBoard[1] === "X" && gameBoard[2] === "X") ||
+      (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard[2] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
       return true;
     }
     if (
-      (gameBoard[3] === 'X' && gameBoard[4] === 'X' && gameBoard[5] === 'X')
-      || (gameBoard[3] === 'O' && gameBoard[4] === 'O' && gameBoard[5] === 'O')
+      (gameBoard[3] === "X" && gameBoard[4] === "X" && gameBoard[5] === "X") ||
+      (gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard[5] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     if (
-      (gameBoard[6] === 'X' && gameBoard[7] === 'X' && gameBoard[8] === 'X')
-      || (gameBoard[6] === 'O' && gameBoard[7] === 'O' && gameBoard[8] === 'O')
+      (gameBoard[6] === "X" && gameBoard[7] === "X" && gameBoard[8] === "X") ||
+      (gameBoard[6] === "O" && gameBoard[7] === "O" && gameBoard[8] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     // Check Columns
     if (
-      (gameBoard[0] === 'X' && gameBoard[3] === 'X' && gameBoard[6] === 'X')
-      || (gameBoard[0] === 'O' && gameBoard[3] === 'O' && gameBoard[6] === 'O')
+      (gameBoard[0] === "X" && gameBoard[3] === "X" && gameBoard[6] === "X") ||
+      (gameBoard[0] === "O" && gameBoard[3] === "O" && gameBoard[6] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     if (
-      (gameBoard[1] === 'X' && gameBoard[4] === 'X' && gameBoard[7] === 'X')
-      || (gameBoard[1] === 'O' && gameBoard[4] === 'O' && gameBoard[7] === 'O')
+      (gameBoard[1] === "X" && gameBoard[4] === "X" && gameBoard[7] === "X") ||
+      (gameBoard[1] === "O" && gameBoard[4] === "O" && gameBoard[7] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     if (
-      (gameBoard[2] === 'X' && gameBoard[5] === 'X' && gameBoard[8] === 'X')
-      || (gameBoard[2] === 'O' && gameBoard[5] === 'O' && gameBoard[8] === 'O')
+      (gameBoard[2] === "X" && gameBoard[5] === "X" && gameBoard[8] === "X") ||
+      (gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard[8] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     // Check Diagonals
 
     if (
-      (gameBoard[0] === 'X' && gameBoard[4] === 'X' && gameBoard[8] === 'X')
-      || (gameBoard[0] === 'O' && gameBoard[4] === 'O' && gameBoard[8] === 'O')
+      (gameBoard[0] === "X" && gameBoard[4] === "X" && gameBoard[8] === "X") ||
+      (gameBoard[0] === "O" && gameBoard[4] === "O" && gameBoard[8] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     if (
-      (gameBoard[2] === 'X' && gameBoard[4] === 'X' && gameBoard[6] === 'X')
-      || (gameBoard[2] === 'O' && gameBoard[4] === 'O' && gameBoard[6] === 'O')
+      (gameBoard[2] === "X" && gameBoard[4] === "X" && gameBoard[6] === "X") ||
+      (gameBoard[2] === "O" && gameBoard[4] === "O" && gameBoard[6] === "O")
     ) {
-      console.log('true');
+      console.log("true");
+      main.style.pointerEvents = "none";
+
       return true;
     }
 
     const temp = gameBoard.filter((ele) => ele);
-    console.log(temp)
+    console.log(temp);
     if (temp.length === 9) {
-      return 'Tie';
+      return "Tie";
     }
     return false;
   }
@@ -229,16 +134,16 @@ const Gameboard = (function () {
     addSymbol,
     setGameBoard,
   };
-}());
+})(document);
 
 const Game = (function (doc) {
-  const firstPlayer = Players('Player 1', 'X', '.first');
-  let opponentPlayer = Players('Player 2', 'O', '.second');
+  const firstPlayer = Players("Player 1", "X", ".first");
+  let opponentPlayer = Players("Player 2", "O", ".second");
   let currentPlayer = firstPlayer;
-  const cells = doc.querySelectorAll('.cell');
+  const cells = doc.querySelectorAll(".cell");
 
   cells.forEach((cell) => {
-    cell.addEventListener('click', Gameboard.addSymbol);
+    cell.addEventListener("click", Gameboard.addSymbol);
   });
 
   function getCurrentPlayer() {
@@ -267,55 +172,54 @@ const Game = (function (doc) {
     restartGame,
     cells,
   };
-}(document));
+})(document);
 
 const DisplayController = (function (document) {
-  const popUp = document.querySelector('.popUp');
-  const msg = document.querySelector('.msg');
-  const main = document.querySelector('main');
+  const popUp = document.querySelector(".popUp");
+  const msg = document.querySelector(".msg");
+  const main = document.querySelector("main");
 
   function render(array) {
     for (let i = 0; i < array.length; i += 1) {
       Game.cells[i].textContent = array[i];
       if (Game.cells[i].textContent) {
         console.log(Game.cells[i]);
-        Game.cells[i].style.pointerEvents = 'none';
+        Game.cells[i].style.pointerEvents = "none";
       }
     }
     if (array.length === 0) {
       setTimeout(() => {
-        main.classList.toggle('blur');
-        popUp.classList.toggle('show');
+        main.classList.toggle("blur");
+        popUp.classList.toggle("show");
         Game.cells.forEach((cell) => {
-          cell.textContent = '';
-          cell.style.pointerEvents = 'all';
+          cell.textContent = "";
+          cell.style.pointerEvents = "all";
           console.log(cell.textContent);
         });
       }, 3500);
     }
 
-    const firstPlayer = document.querySelector('.first');
-    const secondPlayer = document.querySelector('.second');
-    document.querySelector('.msg');
-    firstPlayer.classList.toggle('active');
-    secondPlayer.classList.toggle('active');
+    const firstPlayer = document.querySelector(".first");
+    const secondPlayer = document.querySelector(".second");
+    document.querySelector(".msg");
+    firstPlayer.classList.toggle("active");
+    secondPlayer.classList.toggle("active");
   }
 
   function displayWinner(winner) {
     console.log(main);
-    main.style.pointerEvents = 'none';
     setTimeout(() => {
-      main.classList.toggle('blur');
+      main.classList.toggle("blur");
       console.log(`${winner.playerName} has won the Game`);
-      popUp.classList.toggle('show');
+      popUp.classList.toggle("show");
       msg.textContent = `${winner.playerName} has won the Game`;
     }, 1000);
   }
 
   function displayTie() {
     setTimeout(() => {
-      main.classList.toggle('blur');
-      popUp.classList.toggle('show');
+      main.classList.toggle("blur");
+      popUp.classList.toggle("show");
       msg.textContent = "It's A Tie! Try Again";
     }, 1000);
     console.log("It's A Tie! Try Again");
@@ -326,4 +230,4 @@ const DisplayController = (function (document) {
     displayWinner,
     displayTie,
   };
-}(document));
+})(document);
