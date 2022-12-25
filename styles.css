@@ -130,4 +130,5 @@ div:nth-child(6) {
 .blur{
   filter: blur(8px);
   transition: filter 350ms linear;
+  user-select: none;
 }

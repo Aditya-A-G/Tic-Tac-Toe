@@ -9,9 +9,9 @@ const Players = function (name, symbol, ref) {
   };
 };
 
-const Gameboard = (function (doc) {
+const Gameboard = (function () {
   let gameBoard = [];
-  const main = doc.querySelector("main");
+  const main = document.querySelector("main");
 
   function addSymbol(e) {
     const location = e.target.getAttribute("data-index");
@@ -132,15 +132,16 @@ const Gameboard = (function (doc) {
 
   return {
     addSymbol,
+
     setGameBoard,
   };
-})(document);
+})();
 
-const Game = (function (doc) {
+const Game = (function () {
   const firstPlayer = Players("Player 1", "X", ".first");
   let opponentPlayer = Players("Player 2", "O", ".second");
   let currentPlayer = firstPlayer;
-  const cells = doc.querySelectorAll(".cell");
+  const cells = document.querySelectorAll(".cell");
 
   cells.forEach((cell) => {
     cell.addEventListener("click", Gameboard.addSymbol);
@@ -172,9 +173,9 @@ const Game = (function (doc) {
     restartGame,
     cells,
   };
-})(document);
+})();
 
-const DisplayController = (function (document) {
+const DisplayController = (function () {
   const popUp = document.querySelector(".popUp");
   const msg = document.querySelector(".msg");
   const main = document.querySelector("main");
@@ -230,4 +231,4 @@ const DisplayController = (function (document) {
     displayWinner,
     displayTie,
   };
-})(document);
+})();
